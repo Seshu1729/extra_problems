@@ -66,6 +66,16 @@ struct node *getNode()
 	return newNode;
 }
 
+void getLinkedList(struct node *head, struct node **newHead, struct node *pre)
+{
+	if (head->next != NULL)
+	{
+		*newHead = head->next;
+		getLinkedList(head->next, newHead, head);
+	}
+	head->next = pre;
+}
+
 struct node * numberToLinkedList(int N)
 {
 	struct node *start = NULL, *newNode;
@@ -78,14 +88,4 @@ struct node * numberToLinkedList(int N)
 		N /= 10;
 	} while (N);
 	return start;
-}
-
-void getLinkedList(struct node *head, struct node **newHead, struct node *pre)
-{
-	if (head->next != NULL)
-	{
-		*newHead = head->next;
-		getLinkedList(head->next, newHead, head);
-	}
-	head->next = pre;
 }

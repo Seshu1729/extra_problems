@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
-
 struct node
 {
 	int num;
@@ -13,45 +12,39 @@ int linkedListToNumber(struct node *head);
 
 //Main Algorithm Starts Here
 
-void getLinkedList(struct node *head, struct node **newHead, struct node *pre)
+struct node* getResult(struct node *head1, struct node *head2)
 {
-	if (head->next != NULL)
-	{
-		*newHead = head->next;
-		getLinkedList(head->next, newHead, head);
-	}
-	head->next = pre;
+	return numberToLinkedList(linkedListToNumber(head1) + linkedListToNumber(head2));
 }
 
-struct node* getResult(struct node *head)
-{
-	struct node *newHead;
-	if (head == NULL || head->next == NULL)
-		return NULL;
-	getLinkedList(head, &newHead, NULL);
-	return newHead;
-}
 
 void testInputCases()
 {
 	int i;
 	struct node *head;
-	struct node *head1 = numberToLinkedList(123456);
-	struct node *head2 = numberToLinkedList(12345);
+	struct node *head11 = numberToLinkedList(135);
+	struct node *head12 = numberToLinkedList(246);
+	struct node *head21 = numberToLinkedList(1478);
+	struct node *head22 = numberToLinkedList(289);
+	struct node *head31 = numberToLinkedList(947);
+	struct node *head32 = numberToLinkedList(9892);
 	struct testcases
 	{
-		struct node *head;
+		struct node *head1;
+		struct node *head2;
 		int result;
-	}test[2] = {
-			{ head1, 654321 },
-			{ head2, 54321 }
+	}test[3] = {
+			{ head11, head12, 381 },
+			{ head21, head22, 1767 },
+			{ head31, head32, 10839 }
 	};
-	for (i = 0; i<2; i++)
+	for (i = 0; i<3; i++)
 	{
-		if (linkedListToNumber(getResult(test[i].head)) == test[i].result)
+		if (linkedListToNumber(getResult(test[i].head1, test[i].head2)) == test[i].result)
 			printf("pass\n");
 		else
-			printf("fail\n");
+			printf("fail");
+
 	}
 }
 

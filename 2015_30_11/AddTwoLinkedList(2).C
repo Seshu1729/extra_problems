@@ -9,12 +9,63 @@ struct node
 struct node *getNode();
 struct node * numberToLinkedList(int N);
 int linkedListToNumber(struct node *head);
+struct node *reverse(struct node *head);
 
 //Main Algorithm Starts Here
 
+struct node *linkedListAdder(struct node *head1, struct node *head2, int carry)
+{
+	struct node *node;
+	if (head1 != NULL&&head2 != NULL)
+	{
+		node = getNode();
+		node->num = (head1->num + head2->num + carry) % 10;
+		carry = (head1->num + head2->num + carry) / 10;
+		node->next = linkedListAdder(head1->next, head2->next, carry);
+		return node;
+	}
+	else if (head1 == NULL&&head2 == NULL)
+	{
+		if (carry > 0)
+		{
+			node = getNode();
+			node->num = carry;
+			node->next = NULL;
+			return node;
+		}
+		else
+			return NULL;
+	}
+	else
+	{
+		if (head2 == NULL)
+		{
+			node = getNode();
+			node->num = (head1->num + carry) % 10;
+			carry = (head1->num + carry) / 10;
+			node->next = linkedListAdder(head1->next, head2, carry);
+			return node;
+		}
+		else
+		{
+			node = getNode();
+			node->num = (head2->num + carry) % 10;
+			carry = (head2->num + carry) / 10;
+			node->next = linkedListAdder(head1, head2->next, carry);
+			return node;
+		}
+	}
+	return NULL;
+}
+
 struct node* getResult(struct node *head1, struct node *head2)
 {
-	return numberToLinkedList(linkedListToNumber(head1) + linkedListToNumber(head2));
+	int carry = 0;
+	struct node *head;
+	head1 = reverse(head1);
+	head2 = reverse(head2);
+	head = linkedListAdder(head1, head2, carry);
+	return reverse(head);
 }
 
 
@@ -43,7 +94,7 @@ void testInputCases()
 		if (linkedListToNumber(getResult(test[i].head1, test[i].head2)) == test[i].result)
 			printf("pass\n");
 		else
-			printf("fail");
+			printf("fail\n");
 
 	}
 }
@@ -84,4 +135,17 @@ int linkedListToNumber(struct node *head)
 		head = head->next;
 	}
 	return result;
+}
+
+struct node *reverse(struct node *head)
+{
+	struct node  *t1 = NULL, *t2 = NULL;
+	while (head != NULL)
+	{
+		t2 = head->next;
+		head->next = t1;
+		t1 = head;
+		head = t2;
+	}
+	return t1;
 }

@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
+
 struct node
 {
 	int num;
@@ -9,70 +10,79 @@ struct node
 struct node *getNode();
 struct node * numberToLinkedList(int N);
 int linkedListToNumber(struct node *head);
-struct node *reverse(struct node *head);
+int getLength(struct node *head);
 
 //Main Algorithm Starts Here
 
-struct node *linkedListAdder(struct node *head1, struct node *head2, int carry)
+struct node *linkedListAdder(struct node *head1, struct node *head2, int *carry)
 {
 	struct node *node;
-	if (head1 != NULL&&head2 != NULL)
+	if (head1 != NULL)
 	{
 		node = getNode();
-		node->num = (head1->num + head2->num + carry) % 10;
-		carry = (head1->num + head2->num + carry) / 10;
 		node->next = linkedListAdder(head1->next, head2->next, carry);
-		return node;
-	}
-	else if (head1 == NULL&&head2 == NULL)
-	{
-		if (carry > 0)
-		{
-			node = getNode();
-			node->num = carry;
-			node->next = NULL;
-			return node;
-		}
-		else
-			return NULL;
 	}
 	else
+		return NULL;
+	node->num = (head1->num + head2->num + *carry) % 10;
+	*carry = (head1->num + head2->num + *carry) / 10;
+	return node;
+}
+
+struct node *addCarry(struct node *head, int carry)
+{
+	struct node *carryNode = getNode();
+	if (carry != 0)
 	{
-		if (head2 == NULL)
-		{
-			node = getNode();
-			node->num = (head1->num + carry) % 10;
-			carry = (head1->num + carry) / 10;
-			node->next = linkedListAdder(head1->next, head2, carry);
-			return node;
-		}
-		else
-		{
-			node = getNode();
-			node->num = (head2->num + carry) % 10;
-			carry = (head2->num + carry) / 10;
-			node->next = linkedListAdder(head1, head2->next, carry);
-			return node;
-		}
+		carryNode->num = carry;
+		carryNode->next = head;
+		return carryNode;
 	}
-	return NULL;
+	else
+		return head;
+}
+struct node *appendZeros(struct node *head, int noOfZeros)
+{
+	struct node *newNode = NULL;
+	while (noOfZeros--)
+	{
+		newNode = getNode();
+		newNode->num = 0;
+		newNode->next = head;
+		head = newNode;
+	}
+	return head;
 }
 
 struct node* getResult(struct node *head1, struct node *head2)
 {
-	int carry = 0;
 	struct node *head;
-	head1 = reverse(head1);
-	head2 = reverse(head2);
-	head = linkedListAdder(head1, head2, carry);
-	return reverse(head);
+	int length1, length2, carry = 0;
+	length1 = getLength(head1);
+	length2 = getLength(head2);
+	if (length1 < length2)
+	{
+		head1 = appendZeros(head1, length2 - length1);
+		head = linkedListAdder(head1, head2, &carry);
+		return addCarry(head, carry);
+	}
+	else if (length1 > length2)
+	{
+		head2 = appendZeros(head2, length1 - length2);
+		head = linkedListAdder(head1, head2, &carry);
+		return addCarry(head, carry);
+	}
+	else
+	{
+		head = linkedListAdder(head1, head2, &carry);
+		return addCarry(head, carry);
+	}
 }
 
 
 void testInputCases()
 {
 	int i;
-	struct node *head;
 	struct node *head11 = numberToLinkedList(135);
 	struct node *head12 = numberToLinkedList(246);
 	struct node *head21 = numberToLinkedList(1478);
@@ -137,15 +147,13 @@ int linkedListToNumber(struct node *head)
 	return result;
 }
 
-struct node *reverse(struct node *head)
+int getLength(struct node *head)
 {
-	struct node  *t1 = NULL, *t2 = NULL;
+	int length = 0;
 	while (head != NULL)
 	{
-		t2 = head->next;
-		head->next = t1;
-		t1 = head;
-		head = t2;
+		head = head->next;
+		length++;
 	}
-	return t1;
+	return length;
 }

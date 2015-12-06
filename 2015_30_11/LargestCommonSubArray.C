@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <stdlib.h>
+
 #define MIN(a) (2<<(sizeof(a)*8)-2)
 
 //Main Algorithm Starts Here

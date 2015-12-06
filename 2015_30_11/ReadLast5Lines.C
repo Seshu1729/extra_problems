@@ -18,7 +18,7 @@ void printLast5Lines(FILE *fp)
 int main()
 {
 	FILE *fp;
-	fp = fopen("AddTwoLinkedList(1).C","r");
+	fp = fopen("AddTwoLinkedList(2).C","r");
 	if(fp==NULL)
 		printf("File Not Exist\n");
 	else
