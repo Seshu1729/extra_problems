@@ -23,14 +23,14 @@ int getResult(int n1, int n2, int n3, int k)
 	if (n1<0 || n2<0 || n3<0)
 		return -1;         //Error Condition
 
-	LCM12 = LCM(n1,n2,1);
+	LCM12 = LCM(n1, n2, 1);
 	LCM23 = LCM(1, n2, n3);
-	LCM31 = LCM(n1,1,n3);
+	LCM31 = LCM(n1, 1, n3);
 	LCM123 = LCM(n1, n2, n3);
 
 	result = (k*LCM123) / ((LCM123 / n1) + (LCM123 / n2) + (LCM123 / n3) - (LCM123 / LCM12) - (LCM123 / LCM23) - (LCM123 / LCM31) + 1);  //Main Formula
 
-	if ((result / n1) + (result / n2) + (result / n3) - (result / LCM12) - (result / LCM23) - (result / LCM31) + (result / LCM123) != k)
+	if ((result / n1) + (result / n2) + (result / n3) - (result / LCM12) - (result / LCM23) - (result / LCM31) + (result / LCM123) < k)
 	{
 		rem1 = n1 - result%n1;
 		rem2 = n2 - result%n2;

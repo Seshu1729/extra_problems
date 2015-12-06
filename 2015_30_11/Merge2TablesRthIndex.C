@@ -14,7 +14,7 @@ int getResult(int n1, int n2, int k)
 
 	result = ((k*LCM) / ((LCM / n1) + (LCM / n2) - 1));    //Main Formula
 
-	if ((result / n1) + (result / n2) - (result / LCM) != k)
+	if ((result / n1) + (result / n2) - (result / LCM) < k)
 	{
 		rem1 = n1 - result%n1;
 		rem2 = n2 - result%n2;
