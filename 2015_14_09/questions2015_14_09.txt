@@ -1,0 +1,14 @@
+1.Multiply two matrices,take their respective dimenssions and elements as input
+2.Given a array of structures
+{studentname,department,section,student id}(student id is unique)
+Given a student ID print his details
+3.given a array of integers,return min and max of an array
+4.given a array of integers,return two integers whose difference closest to zero
+5.Implement following string functions	
+  a.strlen
+  b.strcat
+  c.strsub
+  d.strcmp
+  e.trim
+6.given a sentence,return array of words
+7.given a string and a delimiter return tokens
