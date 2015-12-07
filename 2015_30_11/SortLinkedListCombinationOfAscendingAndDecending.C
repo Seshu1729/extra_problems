@@ -49,7 +49,7 @@ void testInputCases()
 		if (linkedListToNumber(getResult(test[i].head)) == test[i].result)
 			printf("pass\n");
 		else
-			printf("fail %d\n", linkedListToNumber(getResult(test[i].head)));
+			printf("fail\n");
 	}
 }
 
