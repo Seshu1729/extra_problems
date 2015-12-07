@@ -1,0 +1,5 @@
+1.Write a program to return a number in base 8 by taking input in base 10
+2.Write a program to find size of array. Array is in such a way that n numbers in 
+  ascending order one number violates ascending order later n-1 zeros
+3.Write a function to return largest substring of given two strings
+4.Given a base 2 number in string format return a string which is equivalent base 8 nuber of input
