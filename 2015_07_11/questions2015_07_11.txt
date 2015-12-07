@@ -1,0 +1,8 @@
+1.Given a input in base10 return equivalent base2 number
+2.Given a input in base10 return equivalent base -2 number
+3.Given a input in base10 return equivalent fibonacci representation number
+4.Given a input of int type array,k and n.we have to make k items of type n.
+  In conversion cost may calculated which is difference between convected value to n.
+  function has to return the cost
+  Input array has numbers from 0-9
+  
