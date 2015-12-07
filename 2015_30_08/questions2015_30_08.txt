@@ -1,0 +1,8 @@
+1.Write a function to add two arrays and return the result array
+2.Write a function to whch takes input as an array and return an array which has ith number is 
+  product of remaining position numbers in input
+3.Write a function to add and return two binary number string.
+4.Write a function to return base10 value for given base2 number string
+5.Write a fuction to return smallest number of two numbers.Two numbers are supplied as a string seperated by string
+6.Given an array which is in sorted order but some part may be in reverse.sort that array
+7.sort an array which as only number 0,1,2
