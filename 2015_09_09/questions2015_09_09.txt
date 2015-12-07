@@ -1,0 +1,8 @@
+1.Min Rank of given number:Given an unsigned number as input, find the index of the number
+(index starts from 0) in all permutations of the number, sorted in ascending order.
+  Ex:  input 213  :  output 2 (as 123,132,213,231,312,321 are the permutations and 2 is the index value 
+      of 213)
+2.Given three unsigned numbers as input X,Y,Z find out X to the power of Y modulo Z (power(x,y)mod z)
+3.Given two integers X,Y write a function for X*Y without using multipication or addition operators.Use bit operators
+4.given a date print the date as text, exemple:10/1/1992
+should be printed tenth january of nineteen ninety two
